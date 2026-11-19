@@ -1,0 +1,20 @@
+name: Daily WW2 Events
+
+on:
+  schedule:
+    - cron: '30 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest      # a fresh Linux computer in GitHub's cloud
+    steps:
+      - uses: actions/checkout@v4            # 1. download your repo's code
+      - uses: actions/setup-python@v5        # 2. install Python
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt # 3. install your libraries
+      - run: python ww2_today.py             # 4. run your script
+        env:                                 # pass the GitHub Secrets in as environment variables
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
