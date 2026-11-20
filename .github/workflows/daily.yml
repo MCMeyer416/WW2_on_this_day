@@ -2,7 +2,7 @@ name: Daily WW2 Events
 
 on:
   schedule:
-    - cron: '30 5 * * *'
+    - cron: '17 5 * * *'
   workflow_dispatch:
 
 jobs:
