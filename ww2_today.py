@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import os
 
 import requests
@@ -10,8 +11,8 @@ load_dotenv()
 token = os.getenv('TELEGRAM_TOKEN')
 chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
-# Get today's date and format it for the API request
-today = datetime.date.today()
+# Use SAST to avoid date issues between 00:00 and 02:00, due to GitHub's servers running on UTC
+today = datetime.now(ZoneInfo('Africa/Johannesburg'))
 day = today.day
 month = today.month
 
